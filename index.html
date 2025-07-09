@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shintia Motor</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta property="og:title" content="Kredit Motor" />
+    <meta property="og:description" content="Kredit motor dengan bunga murah dan terpercaya" />
+    <meta property="og:image" content=" https://b388-103-190-46-54.ngrok-free.app/shintiamotor/logo.png" />
+    <meta property="og:url" content="https://b388-103-190-46-54.ngrok-free.app/shintiamotor" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffb6c1;
+            margin: 0;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #add8e6; 
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            justify-content: space-between;
+        }
+        .navbar img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        .navbar li {
+            margin: 0 15px;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #666;
+        }
+        .profile-menu {
+			display: none;
+			position: absolute;
+			right: 20px;
+			top: 70px;
+			background-color: #007bff;
+			border-radius: 5px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+			padding: 15px;
+			flex-direction: column;
+			align-items: center;
+			min-width: 200px;
+			text-align: center;
+		}
+		.profile-menu img {
+			height: 60px;
+			width: 60px;
+			border-radius: 50%;
+			margin: 0; 
+		}
+        .profile-menu .user-name {
+            color: white;
+            font-weight: bold;
+            margin: 10px 0; /* Ruang antara gambar dan nama */
+            text-align: center;
+            white-space: nowrap;
+        }
+        .profile-menu a {
+            display: block;
+            padding: 8px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .profile-menu a:hover {
+            background-color: #0056b3;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 0 20px;
+        }
+        .user-info img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+        .content {
+            padding: 80px 20px 20px;
+            text-align: center;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-top: 20px; /* Jarak dari navbar */
+        }
+        .slide {
+            display: none;
+            height: 100%;
+        }
+        .active {
+            display: block;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            user-select: none;
+            transition: background-color 0.6s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+        .next {
+            right: 10px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        footer {
+            text-align: center;
+            background-color: #add8e6;
+            color: black;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        h1, h2 {
+            color: #00bfff;
+        }
+        ul {
+            padding: 0;
+        }
+        ul li {
+            list-style-type: none;
+            margin: 5px 0;
+        }
+        video {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        .motor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .motor-item {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+        }
+        .motor-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+            <img src="logo.png" alt="">
+        </div>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./Produk.php">Produk</a></li>
+            <li><a href="./transaksi.php">Transaksi</a></li>
+        </ul>
+        <div class="user-info" onclick="toggleProfileMenu(event)">
+            <img src="profile.jpg" alt="Profile">
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <img src="profile.jpg" alt="Profile">
+            <div class="user-name">Shintia Destrianita</div>
+            <a href="./Profile.html">Profil</a>
+            <a href="./login.html">Keluar</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://images5.1000ps.net/g-000306-g_W3061953_17-yamaha-r7-638445616040341445.jpg" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="https://images5.1000ps.net/g-000306-g_W3061953_16-yamaha-r7-638445616039716432.jpg" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="https://cdn2.yamaha-motor.eu/prod/product-assets/2024/YZF700R7/2024-Yamaha-YZF700R7-EU-Icon_Blue-Action-001-03.jpg" alt="Slide 3">
+            </div>
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+
+        <div class="right-content">
+            <h2 style="color: black;">Shintia Motor</h2>
+            <h3 style="text-align: center;">"Di setiap perjalanan yang Anda ambil, kami percaya bahwa motor bukan hanya alat transportasi, tetapi juga teman setia yang menemani petualangan hidup Anda. Dengan berbagai pilihan motor berkualitas tinggi yang kami tawarkan, dari desain yang modern hingga performa yang handal, kami berkomitmen untuk memberikan pengalaman berkendara yang menyenangkan dan mengesankan. Setiap produk kami dilengkapi dengan teknologi terbaru dan fitur keselamatan yang menjamin kenyamanan serta keamanan Anda di setiap perjalanan."</h3>
+            <video src="./video.mp4" autoplay muted controls></video>	
+
+            <div class="motor-grid">
+                <div class="motor-item">
+                    <img src="https://imgcdn.oto.com/large/gallery/exterior/84/2720/yamaha-grand-filano-hybrid-connected-slant-front-view-full-image-247658.jpg" alt="Yamaha R7">
+                    <h4>Filano</h4>
+                    <p>Motor yang tepat untuk kamu ingin tampil fashionable di setiap perjalanan</p>
+                    <p><a href="./transaksi.html" style="color: inherit; text-decoration: none;">Harga: Rp 28.055.000</a></p>
+                </div>
+                <div class="motor-item">
+                    <img src="https://imgcdn.oto.com/large/gallery/exterior/84/2527/yamaha-fazzio-slant-front-view-full-image-943315.jpg" alt="Yamaha R15">
+                    <h4>Fazio</h4>
+                    <p>Motor dengan penyimpanan yang luas siap mendukung aktivitas harianmu.</p>
+                    <p><a href="./transaksi.html" style="color: inherit; text-decoration: none;">Harga: Rp 23.180.000</a></p>
+                </div>
+                <div class="motor-item">
+                    <img src="https://imgcdn.oto.com/large/gallery/exterior/84/2509/yamaha-aerox-connected-abs-slant-rear-view-full-image-598838.jpg" alt="Yamaha MT-15">
+                    <h4>Aerox</h4>
+                    <p>Dirancang untuk kelincahan, ideal untuk menjelajahi kota dengan cepat. </p>
+                    <p><a href="./transaksi.html" style="color: inherit; text-decoration: none;">Harga: Rp 31.815.000</p></a>
+                </div>
+                <div class="motor-item">
+                    <img src="https://imgcdn.oto.com/large/gallery/exterior/84/1078/yamaha-r25-slant-upfront-view-244264.jpg" alt="Yamaha R6">
+                    <h4>R25</h4>
+                    <p>Motor sport dengan mesin responsif dan desain agresif.</p>
+                    <p><a href="./transaksi.html" style="color: inherit; text-decoration: none;">Harga: Rp 63.900.000</p></a>
+                </div>
+            </div>
+
+            <h4>Keunggulan Kredit Motor Kami</h4>
+            <ul style="text-align: center;">
+                <li>Bunga rendah</li>
+                <li>Proses cepat dan mudah</li>
+                <li>Jaringan dealer resmi</li>
+                <li>Persyaratan fleksibel</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2024 Kredit Motor. Terpercaya Dengan Kami.</p>
+        </footer>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex >= slides.length) {slideIndex = 0}    
+            slides[slideIndex].style.display = "block";  
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            const slides = document.getElementsByClassName("slide");
+            if (slideIndex >= slides.length) {slideIndex = 0}
+            if (slideIndex < 0) {slideIndex = slides.length - 1}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex].style.display = "block";  
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = 'none';
+        });
+
+        function toggleProfileMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onclick = function(event) {
+            const menu = document.getElementById('profileMenu');
+            if (!event.target.matches('.user-info') && !event.target.closest('.profile-menu')) {
+                menu.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
